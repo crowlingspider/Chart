@@ -1,0 +1,106 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #1e1e2f;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+body.light-mode {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.container {
+  background-color: #2a2a40;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.light-mode .container {
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #00d1b2;
+}
+
+body.light-mode h1 {
+  color: #333;
+}
+
+.controls {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #00d1b2;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+body.light-mode button {
+  background-color: #333;
+  color: #fff;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+#currentPrice {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #00d1b2;
+}
+
+body.light-mode #currentPrice {
+  color: #333;
+}
+
+.slider-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#timeSlider {
+  width: 80%;
+  cursor: pointer;
+}
+
+#mobileWarning {
+  display: none;
+  text-align: center;
+  color: #ff3860;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  #mobileWarning {
+    display: block;
+  }
+}
