@@ -112,17 +112,30 @@ function updateCurrentPrice() {
   currentPriceElement.textContent = `₹${latestPrice.toFixed(2)}`; // Display in INR
 }
 
-// Update chart based on slider
-timeSlider.addEventListener('input', () => {
+// Function to update chart based on slider
+function updateChartFromSlider() {
   const sliderValue = parseInt(timeSlider.value);
-  const slicedData = priceData.slice(-sliderValue);
+  const startIndex = Math.max(0, sliderValue - 150); // Center the view around the slider value
+  const endIndex = Math.min(priceData.length, startIndex + 300); // Show 300 points
 
-  // Update chart data and color
-  chart.data.labels = slicedData.map((_, index) => (index % 50 === 0 ? index : ''));
+  // Extract the visible data
+  const slicedData = priceData.slice(startIndex, endIndex);
+  const slicedLabels = slicedData.map((_, index) => (index % 50 === 0 ? index + startIndex : ''));
+
+  // Update chart data
+  chart.data.labels = slicedLabels;
   chart.data.datasets[0].data = slicedData.map(data => data.price);
   chart.data.datasets[0].borderColor = getLineColor(slicedData); // Update line color
   chart.update();
-});
+}
+
+// Initialize slider
+timeSlider.min = 0;
+timeSlider.max = priceData.length - 1;
+timeSlider.value = priceData.length - 1; // Start at the end
+
+// Add event listener to slider
+timeSlider.addEventListener('input', updateChartFromSlider);
 
 // Dark/Light mode toggle
 themeToggle.addEventListener('click', () => {
@@ -135,3 +148,4 @@ themeToggle.addEventListener('click', () => {
 
 // Initial setup
 updateCurrentPrice();
+updateChartFromSlider(); // Initialize chart with the first 300 points
